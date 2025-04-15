@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FF Diamond Zone</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #0a0a0a;
+      color: #ffffff;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background-color: #121212;
+      text-align: center;
+      padding: 20px;
+    }
+    header img {
+      width: 150px;
+    }
+    h1 {
+      margin: 10px 0 5px;
+    }
+    p.tagline {
+      color: #00e5ff;
+      font-style: italic;
+    }
+    main {
+      max-width: 500px;
+      margin: 30px auto;
+      background-color: #1c1c1c;
+      padding: 20px;
+      border-radius: 10px;
+    }
+    label {
+      display: block;
+      margin: 15px 0 5px;
+    }
+    input, select, textarea {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: none;
+      border-radius: 5px;
+      background-color: #333;
+      color: #fff;
+    }
+    button {
+      background-color: #00e5ff;
+      color: #000;
+      padding: 12px;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .payment {
+      background: #2a2a2a;
+      padding: 10px;
+      border-radius: 5px;
+    }
+    .footer {
+      text-align: center;
+      padding: 20px;
+      background-color: #121212;
+      font-size: 14px;
+      color: #aaa;
+    }
+    .thank-you {
+      display: none;
+      text-align: center;
+      margin-top: 20px;
+      padding: 20px;
+      background-color: #2a2a2a;
+      border-radius: 10px;
+    }
+    .whatsapp {
+      margin-top: 15px;
+    }
+    .whatsapp a {
+      color: #00e676;
+      text-decoration: none;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="logo.png" alt="FF Diamond Zone Logo" />
+    <h1>FF Diamond Zone</h1>
+    <p class="tagline">Fast & Trusted Free Fire Diamond Top-Up in Bangladesh (Delivery within 5–10 minutes)</p>
+  </header>
+  <main>
+    <form onsubmit="event.preventDefault(); validateForm();">
+      <label for="uid">Free Fire UID:</label>
+      <input type="text" id="uid" name="uid" required />
+
+      <label for="serviceId">Service ID (Auto):</label>
+      <input type="text" id="serviceId" name="serviceId" readonly />
+
+      <label for="package">Select Diamond Package:</label>
+      <select id="package" name="package">
+        <option value="100">100 Diamonds - ৳85</option>
+        <option value="310">310 Diamonds - ৳255</option>
+        <option value="520">520 Diamonds - ৳425</option>
+        <option value="1080">1080 Diamonds - ৳850</option>
+      </select>
+
+      <div class="payment">
+        <p><strong>bKash:</strong> 01902567074</p>
+        <p><strong>Nagad:</strong> 01700629566</p>
+      </div>
+
+      <label for="txn">Payment Transaction ID:</label>
+      <input type="text" id="txn" name="txn" required pattern="(?=.*\d)(?=.*[a-zA-Z]).{6,}" title="Transaction ID must contain both letters and numbers." />
+
+      <label for="note">Note (optional):</label>
+      <textarea id="note" name="note"></textarea>
+
+      <button type="submit">Place Order</button>
+    </form>
+
+    <div class="thank-you" id="thankYou">
+      <h2>Thank you for your order!</h2>
+      <p>We will verify your payment and top-up your diamonds shortly.</p>
+      <div class="whatsapp">
+        <p>Need help? <a href="https://wa.me/8801700629566?text=Hi!%20I%20need%20help%20with%20my%20order%20on%20FF%20Diamond%20Zone" target="_blank">WhatsApp</a> | <a href="https://www.facebook.com/profile.php?id=61575056109067" target="_blank">Facebook Page</a></p>
+      </div>
+    </div>
+  </main>
+  <div class="footer">
+    &copy; 2025 FF Diamond Zone. All rights reserved.
+  </div>
+  <script>
+    function generateServiceID() {
+      const id = 'FDZ' + Date.now();
+      document.getElementById('serviceId').value = id;
+    }
+
+    function validateForm() {
+      const txn = document.getElementById('txn').value;
+      const regex = /(?=.*\d)(?=.*[a-zA-Z]).{6,}/;
+
+      if (!regex.test(txn)) {
+        alert("Transaction ID must contain at least 6 characters including both letters and numbers.");
+        return false;
+      }
+
+      document.querySelector('form').style.display = 'none';
+      document.getElementById('thankYou').style.display = 'block';
+    }
+
+    window.onload = generateServiceID;
+  </script>
+</body>
+</html>
